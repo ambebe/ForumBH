@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Пример футера</title>
+    <link rel="stylesheet" href="{% static 'mainpage/css/keeks.css' %}">
+</head>
+<body>
+    <header style="background-color: #333; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+        <!-- Логотип -->
+        <div class="logo">
+            <h2>Мой Сайт</h2>
+        </div>
+        
+        <!-- Навигация -->
+        <nav>
+            <ul style="display: flex; list-style: none; gap: 20px;">
+                <li><a href="#" style="color: white; text-decoration: none;">Главная</a></li>
+                <li><a href="#" style="color: white; text-decoration: none;">О нас</a></li>
+                <li><a href="#" style="color: white; text-decoration: none;">Контакты</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <!-- Основной контент страницы -->
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 Мой Сайт. Все права защищены.</p>
+    </footer>
+</body>

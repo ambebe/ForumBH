@@ -1,0 +1,21 @@
+.site-footer {
+    background-color: #333; /* Темный фон */
+    color: white; /* Белый текст */
+    text-align: center; /* Центрирование */
+    padding: 20px; /* Отступы */
+    margin-top: auto; /* Помогает прижать футер с Flexbox */
+    flex-shrink: 0; /* Футер не сжимается */
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto; /* Растягивает контент, выталкивая футер вниз */
+}
