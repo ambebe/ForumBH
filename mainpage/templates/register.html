@@ -1,0 +1,10 @@
+<!-- templates/accounts/register.html -->
+
+
+
+<h2>Реєстрація</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-dark rounded-pill" type="submit">Зареєструватися</button>
+</form>
