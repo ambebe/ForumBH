@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from .models import *
 from django.contrib.auth import authenticate, login
 from django.views.generic import FormView
-from .forms import LoginForm
+from .forms import LoginForm, ProfileForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 from .models import Item
@@ -33,12 +33,19 @@ class RegisterView(CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('login')  # Після успішної реєстрації переходимо на сторінку логіну
 
+def edit_profile(request):
+    profile, _ = Profile.objects.get_or_create(user=request.user)
+    
+    if request.method == "POST":
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ProfileForm(instance=profile)
+    return render(request, "profile.html", {"form": form})
 
 def simple_view(request):
     return render(request, "base.html")
-
-def profile_view(request):
-    return render(request, "profile.html")
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'base.html'

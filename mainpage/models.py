@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Sup(models.Model):
     gmail = models.CharField(max_length=100)
@@ -21,3 +22,8 @@ class Item(models.Model):
     description = models.CharField(max_length=200)
     price = models.IntegerField()
     icon = models.ImageField(upload_to="myfirstpage/images/")
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField()
+    avatar = models. FileField(upload_to='avatars', blank=True, null=True)

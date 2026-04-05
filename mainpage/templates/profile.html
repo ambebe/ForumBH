@@ -43,13 +43,28 @@
 
 <div class="container">
     <img src="https://via.placeholder.com/120" alt="Фото профиля">
-    <h1>Твоё имя</h1>
-    <p>Краткое описание о себе:</p>
+    <h1>{{ user.username }}</h1>
+
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+    </form>
+
+    <!-- <form method="post">
+    <input type="text" name="bio" placeholder="Я люблю писать о себе">
+    <button type="submit">Отправить</button>
+    </form> -->
+
+    <p><strong>О себе:</strong> {{ user.profile.bio|default:"Нет информации" }}</p>
+
+
+<p>{{ info }}</p>
     
     <div class="social">
         <a href="#">Instagram</a>
         <a href="#">Telegram</a>
-        <a href="#">GitHub</a>
+        <a href="{% url 'base' %}">Главная</a>
     </div>
 </div>
 

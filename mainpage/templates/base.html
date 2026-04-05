@@ -15,16 +15,13 @@
         <!-- Навигация -->
         <nav>
             {% if request.user.is_authenticated %}
-            <h1>HELLO, AUTHENTICATED USER!</h1>
+            <h1>HELLO, {{ user.username }}!</h1>
             <li><a href="{% url 'profile' %}" style="color: white; text-decoration: none;">профиль</a></li>
             {% else %}
             <h1>HELLO, UNAUTHENTICATED USER!</h1>
             <li><a href="{% url 'login' %}" style="color: white; text-decoration: none;">логин</a></li>
+            <li><a href="{% url 'register' %}" style="color: white; text-decoration: none;">регистрация</a></li>
             {% endif %}
-            <ul style="display: flex; list-style: none; gap: 20px;">
-                <li><a href="" style="color: white; text-decoration: none;">Главная</a></li>
-                
-            
             </ul>
         </nav>
     </header>
