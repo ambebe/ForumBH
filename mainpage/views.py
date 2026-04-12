@@ -27,6 +27,7 @@ class LoginView(FormView):
         else:
             form.add_error(None, 'Невірний логін або пароль')
             return self.form_invalid(form)
+        
 
 class RegisterView(CreateView):
     template_name = 'register.html'
@@ -37,7 +38,7 @@ def edit_profile(request):
     profile, _ = Profile.objects.get_or_create(user=request.user)
     
     if request.method == "POST":
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
     else:
@@ -46,6 +47,7 @@ def edit_profile(request):
 
 def simple_view(request):
     return render(request, "base.html")
+
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'base.html'

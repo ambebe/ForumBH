@@ -42,10 +42,14 @@
 <body>
 
 <div class="container">
-    <img src="https://via.placeholder.com/120" alt="Фото профиля">
+    {% if user.profile.avatar %}
+    <img src="{{ user.profile.avatar.url }}" width="150">
+    {% else %}
+    <p>No avatar</p>
+    {% endif %}
     <h1>{{ user.username }}</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
