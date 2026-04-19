@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мой профиль</title>
+{% extends 'base.html' %}
+
+{% block content %}
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,8 +35,6 @@
             color: #007BFF;
         }
     </style>
-</head>
-<body>
 
 <div class="container">
     {% if user.profile.avatar %}
@@ -65,12 +60,5 @@
 
 <p>{{ info }}</p>
     
-    <div class="social">
-        <a href="#">Instagram</a>
-        <a href="#">Telegram</a>
-        <a href="{% url 'base' %}">Главная</a>
-    </div>
 </div>
-
-</body>
-</html>
+{% endblock %}

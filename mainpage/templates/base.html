@@ -6,30 +6,45 @@
     <link rel="stylesheet" href="{% static 'mainpage/css/keeks.css' %}">
 </head>
 <body>
-    <header style="background-color: #333; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
-        <!-- Логотип -->
-        <div class="logo">
-            <h2>Мой Сайт</h2>
+        <header style="background-color: #333; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center;">
+            
+            <div class="logo">
+                <h2>Мой Сайт</h2>
+            </div>
+            
+            <nav>
+                {% if request.user.is_authenticated %}
+
+                {% if user.profile.avatar %}
+                <img src="{{ user.profile.avatar.url }}" width="150">
+                {% else %}
+                <p>No avatar</p>
+                {% endif %}
+                <p>〖{{ user.username }}〗</p>
+
+                <li><a href="{% url 'profile' %}" class="button" style="color: white; text-decoration: none;">профиль</a></li>
+                {% else %}
+                <h1>HELLO, UNAUTHENTICATED USER!</h1>
+                <li><a href="{% url 'login' %}" style="color: white; text-decoration: none;">логин</a></li>
+                <li><a href="{% url 'register' %}" style="color: white; text-decoration: none;">регистрация</a></li>
+                {% endif %}
+                </ul>
+            </nav>
+        </header>
+        <div class="content">
+            <!-- Основной контент страницы -->
+            {% block content %}
+
+            {% endblock %}
         </div>
         
-        <!-- Навигация -->
-        <nav>
-            {% if request.user.is_authenticated %}
-            <h1>HELLO, {{ user.username }}!</h1>
-            <li><a href="{% url 'profile' %}" style="color: white; text-decoration: none;">профиль</a></li>
-            {% else %}
-            <h1>HELLO, UNAUTHENTICATED USER!</h1>
-            <li><a href="{% url 'login' %}" style="color: white; text-decoration: none;">логин</a></li>
-            <li><a href="{% url 'register' %}" style="color: white; text-decoration: none;">регистрация</a></li>
-            {% endif %}
-            </ul>
-        </nav>
-    </header>
-    <div class="content">
-        <!-- Основной контент страницы -->
-    </div>
-
-    <footer class="site-footer">
-        <p>&copy; 2026 Мой Сайт. Все права защищены.</p>
-    </footer>
+        <footer class="site-footer">
+            <p>&copy; 2026 Мой Сайт. Все права защищены.</p>
+            <div class="social">
+            <a href="#">Instagram</a>
+            <a href="#">Telegram</a>
+            <a href="{% url 'base' %}">Главная</a>
+            </div>
+        </footer>
 </body>
+    
