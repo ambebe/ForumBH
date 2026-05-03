@@ -1,10 +1,28 @@
-<!-- templates/accounts/register.html -->
+{% extends 'base.html' %}
 
+{% load static %}
 
+{% block content %}
 
-<h2>Реєстрація</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-dark rounded-pill" type="submit">Зареєструватися</button>
-</form>
+<link rel="stylesheet" href="{% static 'mainpage/css/register.css' %}">
+
+<div class="auth-card">
+
+    <div class="auth-title">⚔️ Реєстрація</div>
+
+    <form method="POST" class="auth-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="my-button">
+            Зареєструватися
+        </button>
+    </form>
+
+    <a href="{% url 'login' %}" class="auth-link">
+        Вже є акаунт? Увійти
+    </a>
+
+</div>
+
+{% endblock %}

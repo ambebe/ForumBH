@@ -1,64 +1,40 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        h1 {
-            margin: 10px 0;
-        }
-        p {
-            color: #555;
-        }
-        .social a {
-            margin: 0 10px;
-            text-decoration: none;
-            color: #007BFF;
-        }
-    </style>
 
-<div class="container">
+<link rel="stylesheet" href="{% static 'mainpage/css/keeks.css' %}">
+<div class="profile-card">
+
     {% if user.profile.avatar %}
-    <img src="{{ user.profile.avatar.url }}" width="150">
+        <img src="{{ user.profile.avatar.url }}" width="150" class="avatar">
     {% else %}
-    <p>No avatar</p>
+        <p>No avatar</p>
     {% endif %}
-    <h1>{{ user.username }}</h1>
 
-    <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
+    <div class="username">{{ user.username }}</div>
+
+    <div class="rank-block">
+        <div class="rank-info">
+            <span class="level">LVL: {{ user.profile.level }}</span>
+            <span class="elo">{{ user.profile.elo }}:ELO</span>
+        </div>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="profile-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="my-button">Сохранить</button>
     </form>
 
-    <!-- <form method="post">
-    <input type="text" name="bio" placeholder="Я люблю писать о себе">
-    <button type="submit">Отправить</button>
-    </form> -->
+    <div class="bio">
+        <strong>О себе:</strong><br>
+        {{ user.profile.bio|default:"Нет информации" }}
+    </div>
 
-    <p><strong>О себе:</strong> {{ user.profile.bio|default:"Нет информации" }}</p>
+    <p>{{ info }}</p>
 
-
-<p>{{ info }}</p>
-    
 </div>
 {% endblock %}
