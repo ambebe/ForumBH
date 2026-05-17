@@ -1,0 +1,162 @@
+.create-post-page {
+    width: 100%;
+    color: white;
+}
+
+.post-header {
+    margin-bottom: 30px;
+}
+
+.post-header h1 {
+    font-size: 40px;
+    color: #ffcc00;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px rgba(255,204,0,0.5);
+}
+
+.post-header p {
+    color: #bdbdbd;
+    font-size: 18px;
+}
+
+.post-form {
+    background: #1f1f2e;
+    border-radius: 18px;
+    padding: 30px;
+    border: 2px solid #2f2f45;
+    box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+.form-box {
+    margin-bottom: 25px;
+}
+
+.form-box label {
+    display: block;
+    margin-bottom: 10px;
+    color: #ffcc00;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #2a2a3d;
+    color: white;
+    font-size: 16px;
+    transition: 0.3s;
+    outline: none;
+}
+
+.form-box input:focus,
+.form-box select:focus,
+.form-box textarea:focus {
+    background: #353550;
+    box-shadow: 0 0 10px #ffcc00;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.publish-btn,
+.reset-btn {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.publish-btn {
+    background: linear-gradient(45deg, #ffcc00, #ff8800);
+    color: black;
+}
+
+.publish-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255,204,0,0.6);
+}
+
+.reset-btn {
+    background: #2d2d44;
+    color: white;
+}
+
+.reset-btn:hover {
+    background: #3b3b5a;
+}
+
+
+.form-box {
+    position: relative;
+}
+
+
+
+.form-box select {
+
+    padding: 8px 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #ffb703;
+    color: black;
+
+    font-weight: bold;
+    font-size: 14px;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: all 0.25s ease;
+
+    appearance: none;
+
+    box-shadow: 0 0 8px rgba(0,0,0,0.25);
+}
+
+
+
+.form-box select:hover {
+
+    background: #ffd166;
+
+    transform: translateY(-2px) scale(1.05);
+
+    box-shadow:
+        0 0 10px #ffb703,
+        0 0 20px #ffd166;
+}
+
+
+
+.form-box select:focus {
+
+    box-shadow:
+        0 0 10px #ffb703,
+        0 0 25px #ffd166;
+}
+
+
+
+.form-box option {
+
+    background: #1e2a78;
+    color: white;
+}

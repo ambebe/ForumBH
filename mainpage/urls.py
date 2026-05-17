@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.HomeView.as_view(), name='base'),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('register/', views.RegisterView.as_view(), name='register'),
-    path('profile/', edit_profile, name='profile')
+    path('profile/', edit_profile, name='profile'),
+    path('create-topic/', views.create_post, name='post'),
 ]

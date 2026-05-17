@@ -12,6 +12,7 @@ from django.views.generic import TemplateView
 from .models import Item
 
 
+
 class LoginView(FormView):
     template_name = 'login.html'
     form_class = LoginForm
@@ -47,6 +48,10 @@ def edit_profile(request):
 
 def simple_view(request):
     return render(request, "base.html")
+
+def create_post(request):
+    return render(request, "post.html")
+    
 
 
 class HomeView(LoginRequiredMixin, TemplateView):

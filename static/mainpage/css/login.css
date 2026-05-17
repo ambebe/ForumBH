@@ -1,13 +1,13 @@
-        .register-wrapper {
+.login-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 85vh;
         }
 
-        .auth-card {
+        .login-box {
 
-            width: 430px;
+            width: 420px;
 
             background: rgba(255,255,255,0.05);
 
@@ -22,7 +22,7 @@
             animation: fadeIn 0.5s ease;
         }
 
-        .auth-title {
+        .login-title {
 
             text-align: center;
 
@@ -37,24 +37,22 @@
                 0 0 20px rgba(255,183,3,0.5);
         }
 
-        .auth-form p {
-
+        .login-box form p {
             display: flex;
             flex-direction: column;
-
             margin-bottom: 20px;
         }
 
-        .auth-form label {
+        .login-box label {
 
             margin-bottom: 8px;
 
             font-weight: bold;
 
-            color: white;
+            color: #ffffff;
         }
 
-        .auth-form input {
+        .login-box input {
 
             padding: 12px 14px;
 
@@ -70,7 +68,7 @@
             transition: 0.25s;
         }
 
-        .auth-form input:focus {
+        .login-box input:focus {
 
             outline: none;
 
@@ -83,11 +81,9 @@
             transform: scale(1.02);
         }
 
-        .my-button {
+        .login-btn {
 
             width: 100%;
-
-            margin-top: 10px;
 
             padding: 12px;
 
@@ -98,15 +94,15 @@
 
             color: black;
 
-            font-size: 16px;
             font-weight: bold;
+            font-size: 16px;
 
             cursor: pointer;
 
             transition: all 0.25s ease;
         }
 
-        .my-button:hover {
+        .login-btn:hover {
 
             background: #ffd166;
 
@@ -117,13 +113,25 @@
                 0 0 20px #ffd166;
         }
 
-        .auth-link {
+        .error-text {
 
-            display: block;
+            margin-top: 15px;
+
+            color: #ff4d6d;
+
+            text-align: center;
+
+            font-weight: bold;
+        }
+
+        .register-link {
 
             margin-top: 20px;
 
             text-align: center;
+        }
+
+        .register-link a {
 
             color: #3a86ff;
 
@@ -134,28 +142,11 @@
             transition: 0.25s;
         }
 
-        .auth-link:hover {
+        .register-link a:hover {
 
             color: #7cb7ff;
 
             text-shadow: 0 0 10px #3a86ff;
-        }
-
-        .errorlist {
-
-            list-style: none;
-
-            padding: 10px;
-
-            border-radius: 8px;
-
-            background: rgba(255,0,0,0.1);
-
-            color: #ff4d6d;
-
-            margin-bottom: 15px;
-
-            font-weight: bold;
         }
 
         @keyframes fadeIn {

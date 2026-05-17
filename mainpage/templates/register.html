@@ -1,28 +1,45 @@
-{% extends 'base.html' %}
-
 {% load static %}
 
-{% block content %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация | Brawlhalla Forum</title>
 
-<link rel="stylesheet" href="{% static 'mainpage/css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'mainpage/css/geak.css' %}">
+    <link rel="stylesheet" href="{% static 'mainpage/css/register.css' %}">
 
-<div class="auth-card">
 
-    <div class="auth-title">⚔️ Реєстрація</div>
+</head>
+<body>
 
-    <form method="POST" class="auth-form">
-        {% csrf_token %}
-        {{ form.as_p }}
+<div class="register-wrapper">
 
-        <button type="submit" class="my-button">
-            Зареєструватися
-        </button>
-    </form>
+    <div class="auth-card">
 
-    <a href="{% url 'login' %}" class="auth-link">
-        Вже є акаунт? Увійти
-    </a>
+        <div class="auth-title">
+            ⚔️ Реєстрація
+        </div>
+
+        <form method="POST" class="auth-form">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button type="submit" class="my-button">
+                Зареєструватися
+            </button>
+
+        </form>
+
+        <a href="{% url 'login' %}" class="auth-link">
+            Вже є акаунт? Увійти
+        </a>
+
+    </div>
 
 </div>
 
-{% endblock %}
+</body>
+</html>
