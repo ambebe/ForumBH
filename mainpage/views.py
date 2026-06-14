@@ -1,15 +1,25 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
-from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .models import *
 from django.contrib.auth import authenticate, login
-from django.views.generic import FormView
 from .forms import LoginForm, ProfileForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView
-from .models import Item
+from django.contrib.auth.decorators import login_required
+from mainpage.models import Post
+from django.shortcuts import get_object_or_404, redirect
+
+from django.views.generic import ListView, DetailView, CreateView, View, UpdateView, DeleteView, TemplateView, FormView
+from mainpage.mixins import UserIsOwnerMixin
+from mainpage.forms import CommentForm
+from django.http import HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+
+
 
 
 
@@ -49,10 +59,73 @@ def edit_profile(request):
 def simple_view(request):
     return render(request, "base.html")
 
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+
+    if request.user == post.author:
+        post.delete()
+
+    return redirect('base')
+
+
 def create_post(request):
+    if request.method == "POST":
+        title = request.POST.get("title")
+        description = request.POST.get("content")
+
+        Post.objects.create(
+            title=title,
+            description=description,
+            author=request.user
+        )
+
+        return redirect('base')
+
     return render(request, "post.html")
-    
 
 
 class HomeView(LoginRequiredMixin, TemplateView):
     template_name = 'base.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.all().order_by('-created_at')
+        return context
+
+
+
+class CommentLikeToggle(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        comment = get_object_or_404(models.Comment, pk=self.kwargs.get('pk'))
+        like_qs = models.Like.objects.filter(comment=comment, user=request.user)
+        if like_qs.exists():
+            like_qs.delete()
+        else:
+            models.Like.objects.create(comment=comment, user=request.user)
+        return HttpResponseRedirect(comment.get_absolute_url())
+    
+
+class PostDetailView(LoginRequiredMixin, DetailView):
+    model = Post
+    context_object_name = "post"
+    template_name = 'post_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comment_form'] = CommentForm()  # Додаємо порожню форму коментаря в контекст
+        return context
+
+    def post(self, request, *args, **kwargs):
+        comment_form = CommentForm(request.POST, request.FILES)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = self.get_object()
+            comment.save()
+            return redirect('post-detail', pk=comment.post.pk)
+        else:
+            # Тут можна обробити випадок з невалідною формою
+            pass
+
+
+

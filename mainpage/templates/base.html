@@ -44,8 +44,31 @@
             </div>
 
             {% block content %}
-            <h2>Добро пожаловать на форум Brawlhalla</h2>
-            <p>Выбирай категорию или начни обсуждение!</p>
+
+            <h2>Последние обсуждения</h2>
+
+            {% for post in posts %}
+            <div class="post-card">
+                <a href="{% url 'post-detail' post.pk %}"><h3>{{ post.title }}</h3></a>
+
+                <p>{{ post.description }}</p>
+
+                <div class="post-info">
+                    👤 {{ post.author.username }}
+                    •
+                    🕒 {{ post.created_at|date:"d.m.Y H:i" }}
+                </div>
+                {% if request.user == post.author %}
+                <form method="POST" action="{% url 'delete_post' post.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-btn">Удалить</button>
+                </form>
+                {% endif %}
+            </div>
+            {% empty %}
+            <p>Пока нет ни одного поста.</p>
+            {% endfor %}
+
             {% endblock %}
 
         </div>

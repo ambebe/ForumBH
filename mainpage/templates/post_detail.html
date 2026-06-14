@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.description }}</p>
+
+    <!-- Коментарі -->
+    <div class="comments mt-4">
+        <h3>Коментарі</h3>
+        {% for comment in post.comments.all %}
+            <div class="comment mb-2">
+                <p>{{ comment.content }}</p>
+
+                <small>Автор: {{ comment.author.username }}</small>
+                </form>
+            </div>
+        {% empty %}
+            <p>Коментарі відсутні.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Форма додавання коментаря -->
+    <div class="add-comment mt-4">
+        <h4>Додати коментар</h4>
+        <form action="{% url 'post-detail' post.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-primary">Відправити</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
